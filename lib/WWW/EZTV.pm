@@ -32,6 +32,8 @@ sub _build_shows {
     });
 }
 
+1;
+
 =head1 SYNOPSIS
 
 First create a WWW::EZTV object to navigate.
@@ -88,4 +90,6 @@ L<https://github.com/diegok/www-eztv>
 
 Pull requests are also very welcomed, but please include tests demostrating
 what you've fixed.
-1;
+
+=cut
+
