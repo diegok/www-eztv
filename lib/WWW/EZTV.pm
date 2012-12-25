@@ -11,13 +11,13 @@ has url_shows => ( is => 'ro', lazy => 1, default => sub { shift->url->clone->pa
 has shows => 
     is      => 'ro',
     lazy    => 1,
-    default => \&build_shows,
+    builder => '_build_shows',
     handles => {
         find_show    => 'first',
         has_shows    => 'size',
     };
 
-sub build_shows {
+sub _build_shows {
     my $self = shift;
 
     $self->get_response( $self->url_shows )->dom->find('table.forum_header_border tr[name="hover"]')->map(sub {

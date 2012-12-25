@@ -2,8 +2,12 @@ package WWW::EZTV::UA;
 use Moose::Role;
 use Mojo::UserAgent;
 
+# ABSTRACT: User agent for EZTV scrapper.
+
 has ua  => ( is => 'ro', lazy => 1, default => sub { $EZTV::Global::UA || ($EZTV::Global::UA = Mojo::UserAgent->new) } );
 
+=method get_response
+=cut
 sub get_response {
     my ($self, $url) = (shift, shift);
 
