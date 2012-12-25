@@ -49,24 +49,43 @@ First create a WWW::EZTV object to navigate.
     });
 
 =attr url
+
 EZTV URL.
+
 =cut
 
 =attr url_shows
+
 EZTV shows URL.
+
 =cut
 
 =attr shows
+
 L<Mojo::Collection> of L<WWW::EZTV::Show> objects.
+
 =cut
 
 =attr has_shows
+
 How many shows exists.
+
 =cut
 
 =method find_show
+
 Find first L<WWW::EZTV::Show> object matching the given criteria. 
 This method accept an anon function.
+
 =cut
 
+=head1 BUGS
+
+This is an early release, so probable there are plenty of bugs around.
+If you found one, please report it on RT or at the github repo:
+
+L<https://github.com/diegok/www-eztv>
+
+Pull requests are also very welcomed, but please include tests demostrating
+what you've fixed.
 1;

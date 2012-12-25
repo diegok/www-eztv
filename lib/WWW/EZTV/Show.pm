@@ -88,15 +88,21 @@ sub _cleanup_str {
 =cut
 
 =attr episodes
+
 Collection of episodes fetched for this show.
+
 =cut
 
 =attr has_episodes
+
 How many episodes has this show.
+
 =cut
 
 =method find_episode
+
 Find first L<WWW::EZTV::Episode> object matching the given criteria. 
 This method accept an anon function.
+
 =cut
 
