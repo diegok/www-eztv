@@ -1,0 +1,7 @@
+language: perl
+perl:
+  - "5.16"
+before_install:
+  - "cpanm --notest Dist::Zilla Pod::Elemental::Transformer::List"
+install: "dzil authordeps | cpanm --notest && dzil listdeps | cpanm --notest"
+script: "dzil test --release"
