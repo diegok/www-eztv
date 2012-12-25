@@ -2,12 +2,17 @@ package WWW::EZTV::Episode;
 use Moose;
 with 'WWW::EZTV::UA';
 
-# ABSTRACT: EZTV single episode
+# ABSTRACT: Show episode
 
 has show     => is => 'ro', isa => 'WWW::EZTV::Show', required => 1;
 has title    => is => 'ro', isa => 'Str', required => 1;
 has url      => is => 'ro', isa => 'Mojo::URL', required => 1;
-has links    => is => 'rw';
+has links    => 
+    is      => 'ro',
+    handles => {
+        find_link => 'first',
+        has_links => 'size',
+    };
 
 has _parsed  => is => 'ro', lazy => 1, builder => '_parse';
 
@@ -68,3 +73,16 @@ sub _parse {
 }
 
 1;
+
+=attr has_links
+
+How many episodes has this show.
+
+=cut
+
+=method find_link
+
+Find first L<WWW::EZTV::Link> object matching the given criteria. 
+This method accept an anon function.
+
+=cut

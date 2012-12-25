@@ -36,19 +36,23 @@ sub _build_shows {
 
 =head1 SYNOPSIS
 
-First create a WWW::EZTV object to navigate.
-
     use WWW::EZTV;
+    use v5.10;
 
     my $eztv = WWW::EZTV->new;
 
+    # Find one show
     my $show = $eztv->find_show(sub{ $_->name =~ /Walking dead/i });
 
+    # Find one episode
     my $episode = $show->find_episode(sub{ 
         $_->season == 3 && 
         $_->number == 8 && 
         $_->quality eq 'standard' 
     });
+
+    # Get first torrent url for this episode
+    say $episode->find_link(sub{ $_->type eq 'torrent' })->url;
 
 =attr url
 

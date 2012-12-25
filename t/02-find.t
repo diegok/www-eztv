@@ -24,6 +24,10 @@ subtest 'Find episodes' => sub {
     diag( 'Version: ' . $ep->version );
     diag( 'Size:    ' . $ep->size );
     is( $ep->name, 'The Walking Dead', 'Name looks good' );
+
+    ok( $ep->has_links, 'Episode has links' );
+    ok( my $link = $ep->find_link(sub{ $_->type eq 'torrent' }), 'Find a torrent link' );
+    ok( $link->url, 'Link has URL' );
 };
 
 done_testing();

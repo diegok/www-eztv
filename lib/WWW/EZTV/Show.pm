@@ -4,7 +4,7 @@ with 'WWW::EZTV::UA';
 use WWW::EZTV::Link;
 use WWW::EZTV::Episode;
 
-# ABSTRACT: EZTV show object
+# ABSTRACT: Show object
 
 has title    => is => 'ro', isa => 'Str', required => 1;
 has name     => is => 'ro', lazy => 1, default => \&_name;
