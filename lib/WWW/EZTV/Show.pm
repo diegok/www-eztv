@@ -28,10 +28,10 @@ sub _build_episodes {
         my $a  = $tr->at('td:nth-child(2) a');
 
         WWW::EZTV::Episode->new(
-            title    => $a->attrs('title'),
-            url      => $self->url->clone->path($a->attrs('href')),
+            title    => $a->attr('title'),
+            url      => $self->url->clone->path($a->attr('href')),
             links    => $tr->find('td:nth-child(3) a')->map(sub{
-                WWW::EZTV::Link->new( url => shift->attrs('href') )
+                WWW::EZTV::Link->new( url => shift->attr('href') )
             }),
             released => $tr->at('td:nth-child(4)')->all_text,
             show     => $self

@@ -25,7 +25,7 @@ sub _build_shows {
         my $link = $tr->at('td:nth-child(1) a');
         WWW::EZTV::Show->new(
             title  => $link->all_text,
-            url    => $self->url->clone->path($link->attrs('href')),
+            url    => $self->url->clone->path($link->attr('href')),
             status => lc($tr->at('td:nth-child(2)')->all_text),
             rating => $tr->at('td:nth-child(3)')->all_text
         );
