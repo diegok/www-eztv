@@ -18,7 +18,7 @@ sub get_response {
     else {
         my ($err, $code) = $tx->error;
         my $message = shift || 'User agent error';
-        die "$message: $err ($code)";
+        confess sprintf('%s: %s (%s)', $message, $err, $code||'no error code');
     }
 }
 

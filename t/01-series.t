@@ -6,8 +6,12 @@ use Test::More;
 BEGIN { use_ok( 'WWW::EZTV' ); }
 
 ok( my $eztv = WWW::EZTV->new, 'Build eztv crawler' );
-isa_ok( $eztv->shows, 'Mojo::Collection' );
-isa_ok( $eztv->shows->[0], 'WWW::EZTV::Show' );
+
+subtest 'Can retrieve shows' => sub {
+    ok( $eztv->has_shows, 'Can fetch shows list' );
+    isa_ok( $eztv->shows, 'Mojo::Collection' );
+    isa_ok( $eztv->shows->[0], 'WWW::EZTV::Show' );
+};
 
 subtest 'All shows has name and URL' => sub {
     my $has_year = 0;
