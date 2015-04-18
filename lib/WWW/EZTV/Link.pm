@@ -1,4 +1,5 @@
 package WWW::EZTV::Link;
+
 use Moose;
 with 'WWW::EZTV::UA';
 

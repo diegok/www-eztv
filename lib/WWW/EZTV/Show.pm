@@ -1,4 +1,5 @@
 package WWW::EZTV::Show;
+
 use Moose;
 use v5.10;
 with 'WWW::EZTV::UA';

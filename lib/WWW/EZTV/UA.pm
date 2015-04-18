@@ -1,4 +1,5 @@
 package WWW::EZTV::UA;
+
 use Moose::Role;
 use Mojo::UserAgent;
 
