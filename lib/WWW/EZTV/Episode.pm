@@ -50,19 +50,19 @@ sub _parse {
         ((?<quality>\d+p)\s+)?
         (?<team>.*?)
       )
-      (?: 
+      (?:
         \s+
-        \((?<size> 
-          \d+ 
+        \((?<size>
+          \d+
           [^\)]+
-        )\) 
+        )\)
       )?
     \s*$/xi;
 
     return {
         name    => $+{name} || $title,
         chapter => $+{chapter},
-        number  => $+{number} +0,
+        number  => ($+{number}||0) +0,
         season  => ($+{season}||0) +0,
         total   => ($+{total}||0) +0,
         version => $+{version} || '',

@@ -1,5 +1,6 @@
 package WWW::EZTV::Show;
 use Moose;
+use v5.10;
 with 'WWW::EZTV::UA';
 use WWW::EZTV::Link;
 use WWW::EZTV::Episode;
@@ -11,8 +12,8 @@ has name     => is => 'ro', lazy => 1, default => \&_name;
 has year     => is => 'ro', lazy => 1, default => \&_year;
 has url      => is => 'ro', isa => 'Mojo::URL', required => 1;
 has status   => is => 'ro', isa => 'Str', required => 1;
-has rating   => is => 'ro', isa => 'Int', default => sub {0};
-has episodes => 
+has rating   => is => 'ro', isa => 'Num', default => sub {0};
+has episodes =>
     is      => 'ro',
     lazy    => 1,
     builder => '_build_episodes',
@@ -23,15 +24,17 @@ has episodes =>
 
 sub _build_episodes {
     my $self = shift;
-    $self->get_response($self->url)->dom->find('table.forum_header_noborder tr[name="hover"]')->map(sub{
+    $self->get_response($self->url)->dom->find('table.header_noborder tr[name="hover"]')->map(sub{
         my $tr = shift;
-        my $a  = $tr->at('td:nth-child(2) a');
+        my $link = $tr->at('td:nth-child(2) a');
 
         WWW::EZTV::Episode->new(
-            title    => $a->attr('title'),
-            url      => $self->url->clone->path($a->attr('href')),
+            title    => $link->attr('alt'),
+            url      => $self->url->clone->path($link->attr('href')),
             links    => $tr->find('td:nth-child(3) a')->map(sub{
-                WWW::EZTV::Link->new( url => shift->attr('href') )
+                WWW::EZTV::Link->new( url => $_[0]->attr('href')
+                                          || $_[0]->attr('data-url')
+                                          || $_[0]->attr('data-bx-magnet') )
             }),
             released => $tr->at('td:nth-child(4)')->all_text,
             show     => $self

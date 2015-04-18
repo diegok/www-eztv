@@ -1,5 +1,10 @@
 {{$NEXT}}
 
+    - Changed host to eztv.ch
+    - Updated DOM parsing expresions
+
+0.05      2013-12-29 13:14:23 Europe/Madrid
+
     - Force upgrade of Mojolicious to 4.X (no auto version from UA)
     - Small error and tests refactor
 
