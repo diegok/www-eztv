@@ -6,7 +6,7 @@ use WWW::EZTV::Show;
 
 # ABSTRACT: EZTV scrapper
 
-has url       => ( is => 'ro', lazy => 1, default => sub { Mojo::URL->new('https://eztv.ch/') } );
+has url       => ( is => 'ro', lazy => 1, default => sub { Mojo::URL->new('https://eztv.ag/') } );
 has url_shows => ( is => 'ro', lazy => 1, default => sub { shift->url->clone->path('/showlist/') } );
 
 has shows =>
@@ -21,14 +21,14 @@ has shows =>
 sub _build_shows {
     my $self = shift;
 
-    $self->get_response( $self->url_shows )->dom->find('table.header_brd tr[name="hover"]')->map(sub {
+    $self->get_response( $self->url_shows )->dom->find('table.forum_header_border tr[name="hover"]')->map(sub {
         my $tr = shift;
-        my $link = $tr->at('td:nth-child(2) a');
+        my $link = $tr->at('td:nth-child(1) a');
         WWW::EZTV::Show->new(
             title  => $link->all_text,
             url    => $self->url->clone->path($link->attr('href')),
-            status => lc($tr->at('td:nth-child(3)')->all_text),
-            rating => $tr->at('td:nth-child(4)')->text + 0
+            status => lc($tr->at('td:nth-child(2)')->all_text),
+            rating => $tr->at('td:nth-child(3) b')->text + 0
         );
     });
 }
@@ -46,10 +46,10 @@ sub _build_shows {
     my $show = $eztv->find_show(sub{ $_->name =~ /Walking dead/i });
 
     # Find one episode
-    my $episode = $show->find_episode(sub{ 
-        $_->season == 3 && 
-        $_->number == 8 && 
-        $_->quality eq 'standard' 
+    my $episode = $show->find_episode(sub{
+        $_->season == 3 &&
+        $_->number == 8 &&
+        $_->quality eq 'standard'
     });
 
     # Get first torrent url for this episode
@@ -81,7 +81,7 @@ How many shows exists.
 
 =method find_show
 
-Find first L<WWW::EZTV::Show> object matching the given criteria. 
+Find first L<WWW::EZTV::Show> object matching the given criteria.
 This method accept an anon function.
 
 =cut

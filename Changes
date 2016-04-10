@@ -1,5 +1,10 @@
 {{$NEXT}}
 
+    - Changed host to eztv.ag
+    - Updated DOM parsing expresions
+
+0.06      2015-04-18 18:37:00+02:00 Europe/Madrid
+
     - Changed host to eztv.ch
     - Updated DOM parsing expresions
 

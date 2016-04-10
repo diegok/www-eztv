@@ -25,7 +25,7 @@ has episodes =>
 
 sub _build_episodes {
     my $self = shift;
-    $self->get_response($self->url)->dom->find('table.header_noborder tr[name="hover"]')->map(sub{
+    $self->get_response($self->url)->dom->find('table.forum_header_noborder tr[name="hover"]')->map(sub{
         my $tr = shift;
         my $link = $tr->at('td:nth-child(2) a');
 
@@ -37,7 +37,7 @@ sub _build_episodes {
                                           || $_[0]->attr('data-url')
                                           || $_[0]->attr('data-bx-magnet') )
             }),
-            released => $tr->at('td:nth-child(4)')->all_text,
+            released => $tr->at('td:nth-child(5)')->all_text,
             show     => $self
         );
     });

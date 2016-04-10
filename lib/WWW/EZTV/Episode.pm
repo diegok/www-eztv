@@ -8,7 +8,7 @@ with 'WWW::EZTV::UA';
 has show     => is => 'ro', isa => 'WWW::EZTV::Show', required => 1;
 has title    => is => 'ro', isa => 'Str', required => 1;
 has url      => is => 'ro', isa => 'Mojo::URL', required => 1;
-has links    => 
+has links    =>
     is      => 'ro',
     handles => {
         find_link => 'first',
@@ -17,19 +17,19 @@ has links    =>
 
 has _parsed  => is => 'ro', lazy => 1, builder => '_parse';
 
-has name     => is => 'ro', lazy => 1, 
+has name     => is => 'ro', lazy => 1,
     default  => sub { shift->_parsed->{name} };
 
-has season     => is => 'ro', lazy => 1, 
+has season     => is => 'ro', lazy => 1,
     default  => sub { shift->_parsed->{season} };
 
-has number     => is => 'ro', lazy => 1, 
+has number     => is => 'ro', lazy => 1,
     default  => sub { shift->_parsed->{number} };
 
-has version     => is => 'ro', lazy => 1, 
+has version     => is => 'ro', lazy => 1,
     default  => sub { shift->_parsed->{version} };
 
-has quality     => is => 'ro', lazy => 1, 
+has quality     => is => 'ro', lazy => 1,
     default  => sub { shift->_parsed->{quality} || 'standard' };
 
 has size     => is => 'ro', lazy => 1,
@@ -83,7 +83,7 @@ How many episodes has this show.
 
 =method find_link
 
-Find first L<WWW::EZTV::Link> object matching the given criteria. 
+Find first L<WWW::EZTV::Link> object matching the given criteria.
 This method accept an anon function.
 
 =cut

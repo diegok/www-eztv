@@ -11,7 +11,7 @@ my $show;
 
 subtest 'Find a show' => sub {
     ok( $eztv->has_shows, 'Can fetch shows list' );
-    ok( $show = $eztv->find_show(sub{ $_->name =~ /Walking dead/i }), 'Find a known show' );
+    ok( $show = $eztv->find_show(sub{ $_->name =~ /^the walking dead/i }), 'Find a known show' );
     is( $show->name, 'The Walking Dead', 'Name looks good' );
     ok( $show->url, 'Has url ' . $show->url );
     ok( $show->status, 'Has status ' . $show->status );
@@ -19,7 +19,7 @@ subtest 'Find a show' => sub {
 
 subtest 'Find episodes' => sub {
     ok( $show->has_episodes, 'Show fetch show episodes' );
-    ok( my $ep = $show->find_episode(sub{ $_->season == 3 && $_->number == 8 && $_->quality eq 'standard' }), 'Find a known episode' );
+    ok( my $ep = $show->find_episode(sub{ $_->season == 6 && $_->number == 16 && $_->quality eq 'standard' }), 'Find a known episode' );
     diag( 'Title:   ' . $ep->title );
     diag( 'Version: ' . $ep->version );
     diag( 'Size:    ' . $ep->size );
